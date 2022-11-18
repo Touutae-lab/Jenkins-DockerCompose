@@ -1,4 +1,4 @@
-# FastGradaution-CICD
+# Jenkins Docker Compose
 This is Standalone version with easy setup using Docker, with Jenkins + OpenBlue Ocean Plugin
 
 # Usage
