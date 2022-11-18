@@ -1,0 +1,36 @@
+# Pantakan kanprawet Copyright (c) 2022
+# All right reserved
+
+version: "3.8"
+
+services:
+  # Docker image to work with Jenkins
+  jenkins-docker:
+    image: docker:dind
+    volumes:
+      - ./jenkins-docker-certs:/certs/client
+      - ./jenkins-data:/var/jenkins_home
+    environment:
+      DOCKER_TLS_CERTDIR: /certs
+    restart: unless-stopped
+    privileged: true
+    ports:
+      - 2376:2376
+  # Jenkins + BlueOcean Plugin different from current Jenkins/Jenkins images
+  jenkins:
+    build: ./
+    restart: on-failure
+    environment:
+      DOCKER_HOST: tcp://docker:2376
+      DOCKER_CERT_PATH: /certs/client
+      DOCKER_TLS_VERIFY: 1
+    volumes:
+      - ./jenkins-data:/var/jenkins_home
+      - ./jenkins-docker-certs:/certs/client:ro
+    ports:
+      - 8080:8080
+      - 50000:50000
+
+networks:
+  ci_network:
+    driver: bridge
