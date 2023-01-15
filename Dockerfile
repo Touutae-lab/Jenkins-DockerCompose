@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.361.4-jdk11
+FROM jenkins/jenkins:latest
 USER root
 RUN apt-get update && apt-get install -y lsb-release
 RUN curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc \
@@ -9,4 +9,7 @@ RUN echo "deb [arch=$(dpkg --print-architecture) \
     $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
 RUN apt-get update && apt-get install -y docker-ce-cli
 USER jenkins
-RUN jenkins-plugin-cli --plugins "blueocean:1.25.8 docker-workflow:521.v1a_a_dd2073b_2e"
+
+# Install Jenkins with Jenkins CLI or You can Exec to Container for more installation
+RUN jenkins-plugin-cli --plugins blueocean:1.27.0
+RUN jenkins-plugin-cli --plugins dark-theme:262.v0202a_4c8fb_6a
