@@ -1,4 +1,4 @@
 # Misc auto generate by Jenkins
-./jenkins-data/
-./jenkins-docker-certs/
-./.env
+jenkins-data/
+jenkins-docker-certs/
+.env
