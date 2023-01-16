@@ -1,4 +1,5 @@
 FROM jenkins/jenkins:latest
+LABEL image.authors="touutae@pantakan.com"
 USER root
 RUN apt-get update && apt-get install -y lsb-release
 RUN curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc \
